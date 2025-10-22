@@ -71,64 +71,49 @@ $toplam_koltuk_sayisi = $sefer['seat_count'];
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Koltuk Seç ve Satın Al</h2>
 
-    <div class="purchase-container">
-        <h2>Satın Alma Ekranı</h2>
-
-        <div class="info-box">
-            <h4>Sefer Bilgileri</h4>
-            <p><?php echo htmlspecialchars($sefer['departure_city']); ?> -> <?php echo htmlspecialchars($sefer['arrival_city']); ?></p>
-            <p><strong>Fiyat:</strong> <?php echo $bilet_fiyati; ?> TL</p>
-            <hr>
-            <h4>Hesap Bilgileriniz</h4>
-            <p><strong>Mevcut Bakiyeniz:</strong> <?php echo $bakiye; ?> TL</p>
+        <div class="card">
+            <h4 class="card-header">Sefer ve Bakiye Bilgileri</h4>
+            <div style="padding: 1rem;">
+                <p><i class="fa-solid fa-route"></i> <?php echo htmlspecialchars($sefer['departure_city']); ?> -> <?php echo htmlspecialchars($sefer['arrival_city']); ?></p>
+                <p><i class="fa-solid fa-tags"></i> <strong>Bilet Fiyatı:</strong> <?php echo $bilet_fiyati; ?> TL</p>
+                <hr>
+                <p><i class="fa-solid fa-wallet"></i> <strong>Mevcut Bakiyeniz:</strong> <?php echo $bakiye; ?> TL</p>
+            </div>
         </div>
-
+        
         <?php if (isset($_GET['error'])): ?>
-            <?php if ($_GET['error'] == 'balance'): ?>
-                <p class="error-message">İşlem başarısız! Yetersiz bakiye.</p>
-            <?php elseif ($_GET['error'] == 'seat_taken'): ?>
-                <p class="error-message">İşlem başarısız! Seçtiğiniz koltuk sizden hemen önce başkası tarafından alındı.</p>
-            <?php elseif ($_GET['error'] == 'invalid_seat'): ?>
-                <p class="error-message">Geçersiz koltuk numarası.</p>
+            <?php if ($_GET['error'] == 'balance'): ?> <p class="error-message">İşlem başarısız! Yetersiz bakiye.</p>
+            <?php elseif ($_GET['error'] == 'seat_taken'): ?> <p class="error-message">İşlem başarısız! Seçtiğiniz koltuk sizden hemen önce başkası tarafından alındı.</p>
             <?php endif; ?>
         <?php endif; ?>
 
-        <?php
-        // --- BAKİYE KONTROLÜ ---
-        if ($bakiye < $bilet_fiyati): ?>
-            <p class="error-message">Bu bileti almak için bakiyeniz yetersiz. Lütfen bakiye yükleyin.</p>
+        <?php if ($bakiye < $bilet_fiyati): ?>
+            <p class="error-message">Bu bileti almak için bakiyeniz yetersiz.</p>
         <?php else: ?>
-            <h3>Koltuk Seçiniz:</h3>
-            <form action="odeme_islemi.php" method="POST">
-                <input type="hidden" name="sefer_id" value="<?php echo $sefer_id; ?>">
-                
-                <div class="seat-map">
-                    <div class="seat info"><strong>Şoför</strong></div>
-                    <div class="seat info"></div>
-                    <div class="seat info"><strong>Koridor</strong></div>
-                    <div class="seat info"></div>
-                    <div class="seat info"></div>
+            <div class="card">
+                <h4 class="card-header">Koltuk Seçiniz</h4>
+                <form action="odeme_islemi.php" method="POST">
+                    <input type="hidden" name="sefer_id" value="<?php echo $sefer_id; ?>">
+                    <div class="seat-map">
+                        <div class="seat info"><strong>Şoför</strong></div>
+                        <div class="seat info"></div><div class="seat info"></div><div class="seat info"></div><div class="seat info"></div>
 
-                    <?php for ($i = 1; $i <= $toplam_koltuk_sayisi; $i++): ?>
-                        <?php
-                        // Koltuğun dolu olup olmadığını kontrol et
-                        if (in_array($i, $dolu_koltuklar_listesi)): ?>
-                            <button type="button" class="seat sold" disabled><?php echo $i; ?> (Dolu)</button>
-                        <?php else: ?>
-                            <button type="submit" name="koltuk_no" value="<?php echo $i; ?>" class="seat available"><?php echo $i; ?></button>
-                        <?php endif; ?>
-
-                        <?php // Her 2 koltukta bir koridor boşluğu ekle (basit bir otobüs düzeni)
-                        if ($i % 2 == 0 && $i % 4 != 0) {
-                            echo '<div class="seat info"></div>'; // Koridor
-                        }
-                        ?>
-                    <?php endfor; ?>
-                </div>
-            </form>
+                        <?php for ($i = 1; $i <= $toplam_koltuk_sayisi; $i++): ?>
+                            <?php if (in_array($i, $dolu_koltuklar_listesi)): ?>
+                                <button type="button" class="seat sold" disabled><?php echo $i; ?></button>
+                            <?php else: ?>
+                                <button type="submit" name="koltuk_no" value="<?php echo $i; ?>" class="seat available"><?php echo $i; ?></button>
+                            <?php endif; ?>
+                            <?php if ($i % 2 == 0 && $i % 4 != 0) { echo '<div class="seat info"></div>'; } ?>
+                        <?php endfor; ?>
+                    </div>
+                </form>
+            </div>
         <?php endif; ?>
+        <p style="text-align: center; margin-top: 1rem;"><a href="javascript:history.back()">Geri Dön</a></p>
     </div>
-
 </body>
 </html>

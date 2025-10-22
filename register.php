@@ -8,11 +8,11 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Bilet Satın Alma Platformu</h2>
-        <h3>Yeni Hesap Oluştur</h3>
+        <i class="fa-solid fa-user-plus fa-2x" style="color: #007bff; margin-bottom: 1rem;"></i>
+        <h2>Aramıza Katılın</h2>
+        <p style="color: #6c757d; margin-top:-10px;">Hızlı ve güvenli yolculuk için hesap oluşturun.</p>
 
         <?php
-        // Eğer register_islemi.php'den bir hata mesajıyla yönlendirme olduysa
         if (isset($_GET['error']) && $_GET['error'] == 'email_exists') {
             echo '<p class="error-message">Bu e-posta adresi zaten kayıtlı!</p>';
         }
@@ -20,20 +20,20 @@
 
         <form action="register_islemi.php" method="POST">
             <div class="form-group">
-                <label for="fullname">Ad Soyad:</label>
+                <label for="fullname"><i class="fa-solid fa-user"></i> Ad Soyad:</label>
                 <input type="text" id="fullname" name="fullname" required>
             </div>
             <div class="form-group">
-                <label for="email">E-posta Adresi:</label>
+                <label for="email"><i class="fa-solid fa-envelope"></i> E-posta Adresi:</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Şifre:</label>
+                <label for="password"><i class="fa-solid fa-lock"></i> Şifre:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Kayıt Ol</button>
+            <button type="submit">Hesap Oluştur</button>
         </form>
-        <p>Zaten bir hesabınız var mı? <a href="login.php">Giriş Yapın</a></p>
+        <p style="margin-top: 1rem;">Zaten bir hesabınız var mı? <a href="login.php">Giriş Yapın</a></p>
     </div>
 </body>
 </html>

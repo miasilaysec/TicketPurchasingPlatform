@@ -1,73 +1,201 @@
+/* --- Genel Stil ve Arka Plan --- */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Yeni fontumuz */
+    background-color: #f8f9fa; /* Temiz bir açık gri arka plan */
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* --- Ana Konteynerler --- */
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
 }
 
 .login-container {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
+    max-width: 420px;
+    margin: 5rem auto;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     text-align: center;
 }
 
-h2, h3 {
-    color: #333;
+h2, h3, h4 {
+    color: #2c3e50;
+    font-weight: 600;
 }
 
+/* --- Form Elemanları --- */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     text-align: left;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
 }
 
-.form-group input {
+.form-group input, .form-group select {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
+.form-group input:focus, .form-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0,123,255,0.2);
+    outline: none;
+}
+
+/* --- Butonlar --- */
 button {
     width: 100%;
-    padding: 0.75rem;
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: #007bff;
     color: white;
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 1rem;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,123,255,0.3);
 }
 
-.error-message {
-    color: #D8000C;
-    background-color: #FFD2D2;
-    padding: 0.5rem;
-    border-radius: 4px;
+.btn-secondary { background-color: #6c757d; }
+.btn-secondary:hover { background-color: #5a6268; box-shadow: 0 4px 15px rgba(108,117,125,0.3); }
+.btn-danger { background-color: #dc3545; }
+.btn-danger:hover { background-color: #c82333; box-shadow: 0 4px 15px rgba(220,53,69,0.3); }
+.btn-success { background-color: #28a745; }
+.btn-success:hover { background-color: #218838; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
+
+/* --- Özel Kart Yapıları (Seferler, Biletler vb.) --- */
+.card {
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    margin-top: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* --- Hata ve Başarı Mesajları --- */
+.error-message, .success-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+}
+.error-message { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; }
+.success-message { color: #155724; background-color: #d4edda; border-color: #c3e6cb; }
+/* --- YENİ EKLENEN BİLET TASARIMI STİLLERİ --- */
+
+/* Yeni Fontu Body'ye Uygula */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6f8;
+}
+
+/* Arama Formu için Küçük İyileştirmeler */
+.search-form {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    padding: 2rem;
+}
+
+.icon-prefix {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+/* --- ASIL OTOBÜS BİLETİ TASARIMI --- */
+.bus-ticket {
+    background: #FFFFFF;
+    display: flex;
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden; /* Perfore (yırtık) efekti için önemli */
+}
+.bus-ticket:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.ticket-main {
+    padding: 1.5rem;
+    flex-grow: 1; /* Ana bölümün genişlemesini sağlar */
+}
+
+.ticket-rip {
+    /* Bu kısım, biletin kenarındaki o yırtık efekti için sihirli CSS'i içerir */
+    background: radial-gradient(circle at 0 10px, transparent 0, transparent 5px, #f4f6f8 5px) repeat-y,
+                radial-gradient(circle at 100% 10px, #FFFFFF 0, #FFFFFF 5px, transparent 5px) repeat-y;
+    background-size: 10px 20px;
+    width: 20px; /* Yırtık alanının genişliği */
+}
+
+.ticket-actions {
+    background-color: #f9fafb;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    border-left: 2px dashed #e0e0e0; /* Kesikli ayırıcı çizgi */
+}
+
+.ticket-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #007bff;
     margin-bottom: 1rem;
 }
 
-.success-message {
-    color: #4F8A10;
-    background-color: #DFF2BF;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
+.btn-details {
+    width: auto;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 8px;
+}
+/* --- ANA SAYFA ORTALAMA KODU --- */
+.main-container {
+    max-width: 800px; /* Konteynerin maksimum genişliği */
+    margin: 2rem auto; /* Üstten ve alttan boşluk bırakır, yatayda otomatik olarak ortalar */
 }

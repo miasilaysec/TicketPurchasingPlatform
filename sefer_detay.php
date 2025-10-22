@@ -44,27 +44,33 @@ if (!$sefer) {
     </style>
 </head>
 <body>
-
-    <div class="detail-container">
-        <div class="trip-details">
-            <h2>
-                <?php echo htmlspecialchars($sefer['departure_city']); ?> -> <?php echo htmlspecialchars($sefer['arrival_city']); ?>
+    <div class="container">
+        <div class="card">
+            <h2 class="card-header">
+                <i class="fa-solid fa-bus"></i> Sefer Detayları
             </h2>
-            <p><strong>Firma:</strong> <?php echo htmlspecialchars($sefer['company_name']); ?></p>
-            <p><strong>Kalkış Zamanı:</strong> <?php echo date('d F Y, H:i', strtotime($sefer['departure_time'])); ?></p>
-            <p><strong>Varış Zamanı:</strong> <?php echo date('d F Y, H:i', strtotime($sefer['arrival_time'])); ?></p>
-            <p><strong>Toplam Koltuk:</strong> <?php echo htmlspecialchars($sefer['seat_count']); ?></p>
-            <p><strong>Fiyat:</strong> <?php echo htmlspecialchars($sefer['price']); ?> TL</p>
-
-            <hr>
-            
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="bilet_al.php?sefer_id=<?php echo $sefer['id']; ?>"><button class="buy-button">Bilet Al</button></a>
-            <?php else: ?>
-                <p class="error-message">Bilet satın alabilmek için lütfen <a href="login.php">giriş yapın</a>.</p>
-            <?php endif; ?>
+            <div style="padding: 1rem;">
+                <h3>
+                    <?php echo htmlspecialchars($sefer['departure_city']); ?> 
+                    <i class="fa-solid fa-arrow-right" style="font-size: 1rem; color: #6c757d;"></i> 
+                    <?php echo htmlspecialchars($sefer['arrival_city']); ?>
+                </h3>
+                <p><i class="fa-solid fa-building"></i> <strong>Firma:</strong> <?php echo htmlspecialchars($sefer['company_name']); ?></p>
+                <p><i class="fa-solid fa-clock"></i> <strong>Kalkış Zamanı:</strong> <?php echo date('d F Y, H:i', strtotime($sefer['departure_time'])); ?></p>
+                <p><i class="fa-solid fa-flag-checkered"></i> <strong>Tahmini Varış:</strong> <?php echo date('d F Y, H:i', strtotime($sefer['arrival_time'])); ?></p>
+                <p><i class="fa-solid fa-chair"></i> <strong>Toplam Koltuk:</strong> <?php echo htmlspecialchars($sefer['seat_count']); ?></p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: #28a745;"><i class="fa-solid fa-tags"></i> Fiyat: <?php echo htmlspecialchars($sefer['price']); ?> TL</p>
+                
+                <hr style="margin: 1.5rem 0;">
+                
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="bilet_al.php?sefer_id=<?php echo $sefer['id']; ?>"><button class="btn-success" style="width: 100%;"><i class="fa-solid fa-ticket-alt"></i> Hemen Bilet Al</button></a>
+                <?php else: ?>
+                    <p class="error-message">Bilet satın alabilmek için lütfen <a href="login.php">giriş yapın</a>.</p>
+                <?php endif; ?>
+            </div>
         </div>
+        <p style="text-align: center; margin-top: 1rem;"><a href="index.php">Yeni Arama Yap</a></p>
     </div>
-
 </body>
 </html>

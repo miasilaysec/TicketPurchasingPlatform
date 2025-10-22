@@ -38,20 +38,24 @@ if (!isset($_SESSION['user_id'])) {
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <h1>Hoş Geldiniz!</h1>
-
-        <p>Merhaba, <strong><?php echo htmlspecialchars($_SESSION['user_fullname']); ?></strong>!</p>
-        <p>Kullanıcı rolünüz: <strong><?php echo htmlspecialchars($_SESSION['user_role']); ?></strong></p>
-
-        <p>Burası sizin ana paneliniz. Bilet arama, satın alma ve diğer işlemleri buradan yapabileceksiniz.</p>
-        <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
-            <a href="index.php"><button>Yeni Sefer Ara</button></a>
-            <a href="biletlerim.php"><button style="background-color: #17a2b8;">Biletlerim</button></a>
+    <div class="container" style="max-width: 600px; text-align: center;">
+        <div class="card">
+            <div style="padding: 1rem;">
+                <i class="fa-solid fa-user-check fa-3x" style="color: #28a745; margin-bottom: 1rem;"></i>
+                <h2 class="card-header">Tekrar Hoş Geldiniz, <?php echo htmlspecialchars($_SESSION['user_fullname']); ?>!</h2>
+                <p style="color: #6c757d;">Biletlerinizi yönetebilir veya yeni yolculuklar planlayabilirsiniz.</p>
+                
+                <div style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 2rem;">
+                    <a href="index.php">
+                        <button><i class="fa-solid fa-search"></i> Yeni Sefer Ara</button>
+                    </a>
+                    <a href="biletlerim.php" style="text-decoration: none;">
+                        <button class="btn-secondary" style="margin-top: 1rem;"><i class="fa-solid fa-ticket"></i> Biletlerimi Görüntüle</button>
+                    </a>
+                </div>
+            </div>
         </div>
-        <a href="logout.php">
-            <button class="logout-button">Çıkış Yap</button>
-        </a>
+        <p style="margin-top: 1.5rem;"><a href="logout.php">Çıkış Yap</a></p>
     </div>
 </body>
 </html>

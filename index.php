@@ -26,6 +26,9 @@ if (isset($_GET['kalkis']) && isset($_GET['varis']) && !empty($_GET['kalkis']) &
     <meta charset="UTF--8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilet Satın Alma Platformu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Sadece bu sayfa için ek stiller */
@@ -39,42 +42,54 @@ if (isset($_GET['kalkis']) && isset($_GET['varis']) && !empty($_GET['kalkis']) &
 <body>
 
     <div class="main-container">
-        <h2 style="text-align: center;">Otobüs Bileti Bul</h2>
+        <h2 style="text-align: center; font-weight: 700; font-size: 2.2rem;">Hayalindeki Yolculuğu Planla</h2>
+        <p style="text-align: center; color: #6c757d; margin-top: -10px;">Tek tıkla yüzlerce sefer arasından biletini bul.</p>
 
         <div class="search-form">
             <form action="index.php" method="GET">
                 <div class="form-group">
-                    <label for="kalkis">Nereden:</label>
-                    <input type="text" id="kalkis" name="kalkis" placeholder="Örn: Mardin" required>
+                    <label for="kalkis"><i class="fas fa-plane-departure icon-prefix"></i> Nereden</label>
+                    <input type="text" id="kalkis" name="kalkis" placeholder="Kalkış Şehri" required>
                 </div>
                 <div class="form-group">
-                    <label for="varis">Nereye:</label>
-                    <input type="text" id="varis" name="varis" placeholder="Örn: İstanbul" required>
+                    <label for="varis"><i class="fas fa-plane-arrival icon-prefix"></i> Nereye</label>
+                    <input type="text" id="varis" name="varis" placeholder="Varış Şehri" required>
                 </div>
-                <button type="submit">Sefer Ara</button>
+                <button type="submit"><i class="fas fa-search"></i> Seferleri Bul</button>
             </form>
         </div>
 
         <div class="search-results">
             <?php if ($arama_yapildi): ?>
-                <h3>Arama Sonuçları</h3>
                 <?php if (count($seferler) > 0): ?>
                     <?php foreach ($seferler as $sefer): ?>
-                        <div class="trip-item">
-                            <h4><?php echo htmlspecialchars($sefer['departure_city']); ?> -> <?php echo htmlspecialchars($sefer['arrival_city']); ?></h4>
-                            <p>
-                                <strong>Kalkış Zamanı:</strong> <?php echo date('d M Y H:i', strtotime($sefer['departure_time'])); ?>
-                            </p>
-                            <p>
-                                <strong>Fiyat:</strong> <?php echo htmlspecialchars($sefer['price']); ?> TL
-                            </p>
-                            <a href="sefer_detay.php?id=<?php echo $sefer['id']; ?>">
-                                <button>Detayları Gör</button>
-                            </a>
+                        
+                        <div class="bus-ticket">
+                            <div class="ticket-main">
+                                <h4 style="margin: 0; font-size: 1.4rem; font-weight: 600;">
+                                    <?php echo htmlspecialchars($sefer['departure_city']); ?> 
+                                    <i class="fas fa-long-arrow-alt-right" style="color:#ccc; margin: 0 10px;"></i> 
+                                    <?php echo htmlspecialchars($sefer['arrival_city']); ?>
+                                </h4>
+                                <p style="margin: 0.5rem 0; color: #6c757d;">
+                                    <i class="fas fa-calendar-alt" style="color:#999; margin-right: 5px;"></i> 
+                                    <strong>Kalkış:</strong> <?php echo date('d M Y, H:i', strtotime($sefer['departure_time'])); ?>
+                                </p>
+                            </div>
+                            <div class="ticket-rip"></div>
+                            <div class="ticket-actions">
+                                <div class="ticket-price"><?php echo htmlspecialchars($sefer['price']); ?> TL</div>
+                                <a href="sefer_detay.php?id=<?php echo $sefer['id']; ?>">
+                                    <button class="btn-details">Detaylar</button>
+                                </a>
+                            </div>
                         </div>
+
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <p>Aradığınız kriterlere uygun sefer bulunamadı.</p>
+                    <div class="search-form" style="text-align: center;">
+                        <p>Aradığınız kriterlere uygun sefer bulunamadı.</p>
+                    </div>
                 <?php endif; ?>
             <?php endif; ?>
         </div>

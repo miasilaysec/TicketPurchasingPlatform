@@ -9,16 +9,14 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Bilet Satın Alma Platformu</h2>
-        <h3>Giriş Yap</h3>
-
+        <i class="fa-solid fa-right-to-bracket fa-2x" style="color: #007bff; margin-bottom: 1rem;"></i>
+        <h2>Tekrar Hoş Geldiniz!</h2>
+        <p style="color: #6c757d; margin-top:-10px;">Giriş yaparak biletlerinizi yönetin.</p>
+        
         <?php
-        // register.php'den başarılı bir kayıt sonrası yönlendirme olduysa
         if (isset($_GET['success']) && $_GET['success'] == 'registered') {
             echo '<p class="success-message">Kayıt başarılı! Lütfen giriş yapın.</p>';
         }
-
-        // login_islemi.php'den hatalı giriş denemesi sonrası yönlendirme olduysa
         if (isset($_GET['error']) && $_GET['error'] == 'invalid_credentials') {
             echo '<p class="error-message">E-posta veya şifre hatalı!</p>';
         }
@@ -26,16 +24,16 @@
 
         <form action="login_islemi.php" method="POST">
             <div class="form-group">
-                <label for="email">E-posta Adresi:</label>
+                <label for="email"><i class="fa-solid fa-envelope"></i> E-posta Adresi:</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Şifre:</label>
+                <label for="password"><i class="fa-solid fa-lock"></i> Şifre:</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit">Giriş Yap</button>
         </form>
-        <p>Hesabınız yok mu? <a href="register.php">Kayıt Olun</a></p>
+        <p style="margin-top: 1rem;">Hesabınız yok mu? <a href="register.php">Kayıt Olun</a></p>
     </div>
 </body>
 </html>
