@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  # 'app' adında bir servis (kutumuzun adı) oluşturuyoruz.
+  app:
+    # Bu servis, az önce oluşturduğumuz Dockerfile'ı kullanarak inşa edilecek.
+    build: .
+    # Bilgisayarımızdaki 8080 portuna gelen istekleri,
+    # kutunun içindeki 80 portuna yönlendiriyoruz.
+    # Yani, tarayıcıda localhost:8080 yazdığımızda projemiz çalışacak.
+    ports:
+      - "8080:80"
+    # Proje dosyalarımızı Docker kutusunun içindeki klasöre bağlıyoruz.
+    # Bu sayede bilgisayarımızda bir kod değişikliği yaptığımızda,
+    # bu değişiklik anında kutunun içine de yansır.
+    volumes:
+      - .:/var/www/html
